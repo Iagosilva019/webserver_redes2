@@ -1,0 +1,16 @@
+Means per client:
+ client
+0    1.743293
+1    1.696634
+2    1.711309
+3    1.725972
+4    1.627040
+Name: latency_ms, dtype: float64
+Stds per client:
+ client
+0    0.433350
+1    0.342183
+2    0.350168
+3    0.364216
+4    0.388267
+Name: latency_ms, dtype: float64
