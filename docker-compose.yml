@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  servidor_sequencial:
+    build: .
+    container_name: servidor_sequencial
+    hostname: servidor_sequencial
+    networks:
+      redes2:
+        ipv4_address: 89.34.0.2
+    volumes:
+      - ./servidor_sequencial:/app
+    command: python3 servidor_sequencial.py
+    ports:
+      - "8080:80"
+
+  servidor_concorrente:
+    build: .
+    container_name: servidor_concorrente
+    hostname: servidor_concorrente
+    networks:
+      redes2:
+        ipv4_address: 89.34.0.3
+    volumes:
+      - ./servidor_concorrente:/app
+    command: python3 servidor_concorrente.py
+    ports:
+      - "8081:80"
+
+  cliente:
+    build: .
+    container_name: cliente
+    hostname: cliente
+    networks:
+      redes2:
+        ipv4_address: 89.34.0.4
+    volumes:
+      - ./cliente:/app
+    entrypoint: python3 run_experiment.py
+    depends_on:
+      - servidor_sequencial
+      - servidor_concorrente
+
+networks:
+  redes2:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 89.34.0.0/24
