@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 
-def ler_log_csv(caminho, coluna_tempo='latency_ms'):
+def ler_log_csv(caminho, coluna_tempo='latencia_ms'):
     latencias = []
     timestamps = []
     with open(caminho, 'r') as f:
@@ -10,7 +10,7 @@ def ler_log_csv(caminho, coluna_tempo='latency_ms'):
         for linha in leitor:
             try:
                 latencias.append(float(linha[coluna_tempo]))
-                timestamps.append(float(linha['ts']))
+                timestamps.append(float(linha['timestamp']))
             except ValueError:
                 continue
     return np.array(latencias), np.array(timestamps)
